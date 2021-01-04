@@ -5,20 +5,21 @@ def draw_mesh_extractor(layout, context):
     row = layout.row(align=True)
     row.ui_units_x = 6.2 # 5.8
     if not context.window_manager.bas_extractor.created:
-        props = context.window_manager.bas_extractor
-        if props.mode == 'BLENDER':
+        extractor = context.window_manager.bas_extractor
+        if extractor.mode == 'BLENDER':
             mesh = context.active_object.data
             _props = row.operator("mesh.paint_mask_extract", text="Mask Extract", icon='CLIPUV_HLT')
         else:
             _props = row.operator("bas.mask_extractor_quick", text="Mask Extractor", icon='CLIPUV_HLT')
-            _props.thickness = props.thickness
-            _props.offset = props.offset
-            _props.smoothPasses = props.smooth_passes
-            _props.mode = props.mode
-            _props.superSmooth = props.super_smooth
-            _props.keepMask = props.keep_mask
-            _props.editNewMesh = props.edit_new_mesh
-            _props.postEdition = props.post_edition
+            _props.thickness = extractor.thickness
+            _props.offset = extractor.offset
+            _props.smoothPasses = extractor.smooth_passes
+            _props.mode = extractor.mode
+            _props.superSmooth = extractor.super_smooth
+            _props.keepMask = extractor.keep_mask
+            _props.editNewMesh = extractor.edit_new_mesh
+            _props.postEdition = extractor.post_edition
+            _props.smooth_borders = extractor.smooth_borders
         row.popover(panel="BAS_PT_Mask_Extractor_Options", text="")
     else:
         row.popover(panel="BAS_PT_Mask_Extractor_Options", text="Mask Extractor", icon='MODIFIER_ON')
@@ -33,59 +34,74 @@ class BAS_PT_Mask_Extractor_Options(Panel):
     bl_description = "Mask Extractor options"
     bl_options = {'DEFAULT_CLOSED'}
     
+    def draw_properties(self, layout, extractor):
+        # Modifier Properties.
+        col = layout.column(align=True)
+        
+        header = col.box()
+        header.label(text="Extract Properties:", icon='PROPERTIES')
+        
+        content = col.box()
+        
+        content.prop(extractor, 'thickness', slider=True)
+        content.prop(extractor, 'super_smooth', slider=True)
+        content.prop(extractor, 'smooth_passes')
+        if extractor.mode == 'SINGLE':
+            content.prop(extractor, 'smooth_borders')
+        
+        #_col.separator()
+        
+        # Settings for after-extracting.
+        col = layout.column(align=True)
+        
+        header = col.box()
+        header.label(text="After Extract Settings:", icon='SETTINGS')
+        
+        content = col.box()
+        
+        content.prop(extractor, 'edit_new_mesh', text="Sculpt new mesh when extracted")
+        content.prop(extractor, 'keep_mask', text="Keep original mask")
+        content.prop(extractor, "post_edition", text="Post-Edition")
+        
+        #_col.separator()
+    
     def draw(self, context):
-        props = context.window_manager.bas_extractor
+        extractor = context.window_manager.bas_extractor
         layout = self.layout
-        row = layout.row()
-        if not props.is_created:
-            row.prop(props, 'mode', expand=True, text="Solid")
-            _row = layout.column()
-            if props.mode == 'BLENDER':
+        if not extractor.is_created:
+            layout.prop(extractor, 'mode', expand=True, text="Solid")
+            layout.scale_y = 1.3
+            if extractor.mode == 'BLENDER':
                 mesh = context.active_object.data
-                props = _row.operator("mesh.paint_mask_extract", text="Mask Extract")
+                extractor = layout.operator("mesh.paint_mask_extract", text="Mask Extract")
                 return
-
-            elif props.mode == 'FLAT':
-                _row.active = False
-            else:
-                _row.active = True
-            row = _row.row()
-            row.prop(props, 'thickness', slider=True)
-            row = _row.row()
-            row.prop(props, 'super_smooth', slider=True)
-            row = _row.row()
-            row.prop(props, 'smooth_passes')
-            row = _row.row()
-            row.prop(props, 'edit_new_mesh', text="Sculpt new mesh when extracted")
-            row = _row.row()
-            row.prop(props, 'keep_mask', text="Keep original mask")
-            row = _row.row()
-            row.prop(props, "post_edition", text="Post-Edition")
-            row = _row.row()
-            row.scale_y = 1.5
-            _props = row.operator("bas.mask_extractor_quick", text="Extract Mask !")
-            _props.thickness = props.thickness
-            _props.offset = props.offset
-            _props.smoothPasses = props.smooth_passes
-            _props.mode = props.mode
-            _props.superSmooth = props.super_smooth
-            _props.keepMask = props.keep_mask
-            _props.editNewMesh = props.edit_new_mesh
-            _props.postEdition = props.post_edition
+            elif extractor.mode != 'FLAT':
+                self.draw_properties(layout, extractor)
+                
+            _props = layout.operator("bas.mask_extractor_quick", text="Extract Mask !")
+            _props.thickness = extractor.thickness
+            _props.offset = extractor.offset
+            _props.smoothPasses = extractor.smooth_passes
+            _props.mode = extractor.mode
+            _props.superSmooth = extractor.super_smooth
+            _props.keepMask = extractor.keep_mask
+            _props.editNewMesh = extractor.edit_new_mesh
+            _props.postEdition = extractor.post_edition
+            
         else:
-            if props.post_edition:
+            if extractor.post_edition:
                 col = layout.column()
                 col.scale_y = 1.1
-                if props.extracted:
-                    obj = props.extracted
+                if extractor.extracted:
+                    obj = extractor.extracted
                     row = col.row()
                     solid = obj.modifiers["Solid"]
                     row.prop(solid, "thickness", text="Thickness")
                     row = col.row()
-                    if props.mode == 'SOLID':
+                    if extractor.mode == 'SOLID':
                         smooth = obj.modifiers["Smooth"]
                         row.prop(smooth, "iterations", text="Smooth Passes")
-                    if props.super_smooth:
+                    if extractor.super_smooth:
                         row = col.row()
                         superSmooth = obj.modifiers["Co_Smooth"]
                         row.prop(superSmooth, "iterations", text="Super Smooth Passes")

@@ -58,6 +58,7 @@ class BAS_OT_mask_extractor_quick(Operator):
     keepMask : BoolProperty(default = False, name="Keep Mask", description="Keep Original Mask")
     postEdition : BoolProperty(default = False, name="Post-Edition", description="Be able to edit some values after extracting, the apply changes.")
     fails : IntProperty (default=0, name="Number of User Fails xD")
+    smooth_borders : BoolProperty(default = True, name="Smooth Borders")
 
     @classmethod
     def poll(cls, context):
@@ -187,6 +188,16 @@ class BAS_OT_mask_extractor_quick(Operator):
                 smooth.vertex_group = context.object.vertex_groups.active.name # usa vertex group
                 if not self.postEdition:
                     bpy.ops.object.modifier_apply(modifier="Co_Smooth")
+            if self.smooth_borders:
+                smooth = obj.modifiers.new(name="Lap_Smooth", type='LAPLACIANSMOOTH')
+                smooth.invert_vertex_group = True
+                smooth.vertex_group = context.object.vertex_groups.active.name
+                smooth.use_normalized = False
+                smooth.use_volume_preserve = False
+                smooth.iterations = 100
+                if not self.postEdition:
+                    bpy.ops.object.modifier_apply(modifier="Lap_Smooth")
+        
         # Flat mode. Sólo un plano
         elif self.mode == 'FLAT':
             pass

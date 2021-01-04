@@ -9,6 +9,7 @@ class ExtractorPG(PropertyGroup):
     offset : FloatProperty(min = -10.0, max = 10.0, default = 0.1, name="Offset")
     thickness : FloatProperty(min = 0.0, max = 1.0, default = 0.05, name="Thickness")
     smooth_passes : IntProperty(min = 0, max = 30, default = 15, name="Smooth Passes")
+    smooth_borders : BoolProperty(default = True, name="Smooth Borders")
     mode : EnumProperty(name="Extract Mode",
                      items = (("SOLID","Solid","Solid, two sided"),
                               ("SINGLE","One Side","Like Solid mode but only one sided (front)"),

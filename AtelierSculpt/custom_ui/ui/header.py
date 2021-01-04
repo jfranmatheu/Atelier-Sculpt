@@ -168,6 +168,7 @@ class BAS_HT_header(Header): # Header -> VIEW3D_HT_header
                     _props.keepMask     =   extractor.keep_mask
                     _props.editNewMesh  =   extractor.edit_new_mesh
                     _props.postEdition  =   extractor.post_edition
+                    _props.smooth_borders = extractor.smooth_borders
                 row.popover(panel="BAS_PT_Mask_Extractor_Options", text="")
             else:
                 row.popover(panel="BAS_PT_Mask_Extractor_Options", text="Mask Extractor", icon='MODIFIER_ON')

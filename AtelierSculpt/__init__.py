@@ -12,7 +12,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 '''
-    Copyright (C) 2019-2020 Juan Fran Matheu G.
+    Copyright (C) 2019-2021 Juan Fran Matheu G.
     Contact: jfmatheug@gmail.com
 '''
 
