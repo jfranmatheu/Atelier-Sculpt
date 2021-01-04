@@ -1,6 +1,7 @@
 # Custom
 user_data/saved_custom_ui/*.json
 *__pycache__/
+*.pyc
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

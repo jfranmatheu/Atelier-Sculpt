@@ -60,7 +60,7 @@ def on_load_handler(dummy):
 def register():
     REGISTER_OPS()
 
-    Header.append(temporal_tool_header_buttons)
+    ##Header.append(temporal_tool_header_buttons)
 
     try:
         unregister_class(ToolHeader)
@@ -102,6 +102,6 @@ def unregister():
 
     load_post.remove(on_load_handler)
 
-    Header.remove(temporal_tool_header_buttons)
+    ##Header.remove(temporal_tool_header_buttons)
 
     UNREGISTER_OPS()
