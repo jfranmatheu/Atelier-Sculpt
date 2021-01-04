@@ -114,7 +114,8 @@ class BAS_OT_mask_extractor_quick(Operator):
             ShowMessageBox("You got it!", "ALELUYA!", 'FUND')
         self.fails = 0
         bpy.ops.object.mode_set(mode='OBJECT') # Cambiamos a Object
-        context.view_layer.objects.active = context.selected_objects[1] # Seleccionamos la malla extraida
+        n = len(context.selected_objects)
+        context.view_layer.objects.active = context.selected_objects[0] if n == 1 else context.selected_objects[1] if n > 1 else activeObj # Seleccionamos la malla extraida
 
         props.is_created = True
 
@@ -188,15 +189,15 @@ class BAS_OT_mask_extractor_quick(Operator):
                 smooth.vertex_group = context.object.vertex_groups.active.name # usa vertex group
                 if not self.postEdition:
                     bpy.ops.object.modifier_apply(modifier="Co_Smooth")
-            if self.smooth_borders:
-                smooth = obj.modifiers.new(name="Lap_Smooth", type='LAPLACIANSMOOTH')
-                smooth.invert_vertex_group = True
-                smooth.vertex_group = context.object.vertex_groups.active.name
-                smooth.use_normalized = False
-                smooth.use_volume_preserve = False
-                smooth.iterations = 100
-                if not self.postEdition:
-                    bpy.ops.object.modifier_apply(modifier="Lap_Smooth")
+                if self.smooth_borders:
+                    smooth = obj.modifiers.new(name="Lap_Smooth", type='LAPLACIANSMOOTH')
+                    smooth.invert_vertex_group = True
+                    smooth.vertex_group = context.object.vertex_groups.active.name
+                    smooth.use_normalized = False
+                    smooth.use_volume_preserve = False
+                    smooth.iterations = 100
+                    if not self.postEdition:
+                        bpy.ops.object.modifier_apply(modifier="Lap_Smooth")
         
         # Flat mode. Sólo un plano
         elif self.mode == 'FLAT':

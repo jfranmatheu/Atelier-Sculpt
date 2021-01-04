@@ -46,7 +46,7 @@ class BAS_PT_Mask_Extractor_Options(Panel):
         content.prop(extractor, 'thickness', slider=True)
         content.prop(extractor, 'super_smooth', slider=True)
         content.prop(extractor, 'smooth_passes')
-        if extractor.mode == 'SINGLE':
+        if extractor.mode == 'SINGLE' and self.superSmooth:
             content.prop(extractor, 'smooth_borders')
         
         #_col.separator()
@@ -77,7 +77,7 @@ class BAS_PT_Mask_Extractor_Options(Panel):
                 return
             elif extractor.mode != 'FLAT':
                 self.draw_properties(layout, extractor)
-                
+            
             _props = layout.operator("bas.mask_extractor_quick", text="Extract Mask !")
             _props.thickness = extractor.thickness
             _props.offset = extractor.offset
@@ -87,6 +87,7 @@ class BAS_PT_Mask_Extractor_Options(Panel):
             _props.keepMask = extractor.keep_mask
             _props.editNewMesh = extractor.edit_new_mesh
             _props.postEdition = extractor.post_edition
+            _props.smooth_borders = extractor.smooth_borders
             
         else:
             if extractor.post_edition:

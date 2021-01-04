@@ -16,7 +16,6 @@ class BAS_OT_mask_detacher(Operator):
     smoothPasses : IntProperty(min = 0, max = 30, default = 15, name="Smooth Passes")  
     mode : EnumProperty(name="Extract Mode",
                      items = (("SOLID","Solid",""),
-
                               ("SINGLE","One Sided",""),
                               ("FLAT","Flat","")),
                      default = "SOLID", description="Mode in how to apply the mesh extraction"
@@ -63,7 +62,9 @@ class BAS_OT_mask_detacher(Operator):
         bpy.ops.mesh.select_all(action='SELECT')
         bpy.ops.mesh.delete_loose() # borrar vertices sueltos para cada malla
         bpy.ops.object.mode_set(mode='OBJECT') # Cambiamos a Object
-        context.view_layer.objects.active = context.selected_objects[1] # Seleccionamos la malla extraida
+        n = len(context.selected_objects)
+        context.view_layer.objects.active = context.selected_objects[0] if n == 1 else context.selected_objects[1] if n > 1 else activeObj
+        ##context.view_layer.objects.active = context.selected_objects[1] # Seleccionamos la malla extraida
         maskedObj = context.active_object # Guardamos referencia a la malla extraida
         bpy.ops.object.select_all(action='DESELECT') # deseleccionar todo # QUITANDO ESTA LINEA PUEDES VER EL OUTLINE DE LA MALLA EXTRAIDA MIENTARS ESCULPES EN LA MALLA BASE, UTIL EN ALGUNOS CASOS
         
