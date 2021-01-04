@@ -92,4 +92,4 @@ class BAS_PT_Mask_Extractor_Options(Panel):
                 row = col.row()
                 row.alert = True
                 row.scale_y = 1.3
-                row.operator("bas.mask_extractor_apply", text="> APPLY CHANGES <")
+                row.operator("bas.mask_extractor_apply_changes", text="> APPLY CHANGES <")

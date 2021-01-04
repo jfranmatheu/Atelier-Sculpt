@@ -4,6 +4,7 @@ from mathutils import Vector
 from ...utils.geo2dutils import is_inside_2d_rect as mouse_inside_item
 from ..io import save_actual_ui_state
 from ..blocks.block_data import blocks
+from ..draw import edit_custom_ui_callback_px
 
 
 class BAS_OT_edit_custom_ui(Operator):
