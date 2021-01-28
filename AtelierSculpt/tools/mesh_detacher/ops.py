@@ -64,7 +64,6 @@ class BAS_OT_mask_detacher(Operator):
         bpy.ops.object.mode_set(mode='OBJECT') # Cambiamos a Object
         n = len(context.selected_objects)
         context.view_layer.objects.active = context.selected_objects[0] if n == 1 else context.selected_objects[1] if n > 1 else activeObj
-        ##context.view_layer.objects.active = context.selected_objects[1] # Seleccionamos la malla extraida
         maskedObj = context.active_object # Guardamos referencia a la malla extraida
         bpy.ops.object.select_all(action='DESELECT') # deseleccionar todo # QUITANDO ESTA LINEA PUEDES VER EL OUTLINE DE LA MALLA EXTRAIDA MIENTARS ESCULPES EN LA MALLA BASE, UTIL EN ALGUNOS CASOS
         
@@ -79,55 +78,28 @@ class BAS_OT_mask_detacher(Operator):
                 bpy.ops.mesh.select_mode(type='FACE', action='TOGGLE')
                 bpy.ops.mesh.select_all(action='SELECT') # seleccionar todos los vertices
                 bpy.ops.mesh.separate(type='LOOSE') # separar cada malla separada
-                #bpy.ops.mesh.select_mode(type='VERT', action='TOGGLE')
-                #bpy.ops.object.mode_set(mode='OBJECT')
-                #bpy.ops.object.mode_set(mode='EDIT')
-                #bpy.ops.mesh.select_all(action='SELECT') # seleccionar todos los vertices
-                #bpy.ops.mesh.delete_loose() # borrar vertices sueltos para cada malla
                 bpy.ops.object.mode_set(mode='OBJECT')
                 bpy.ops.object.select_all(action='DESELECT') # Ver si es op
                 context.view_layer.objects.active = activeObj
             else:
-                #bpy.ops.object.mode_set(mode='OBJECT')
-                #bpy.ops.object.select_all(action='DESELECT') # Ver si es op
-                
+
                 if self.closeDetachedMeshes:
                     bpy.ops.object.mode_set(mode='EDIT')
                     bpy.ops.mesh.select_all(action='DESELECT')
                     bpy.ops.mesh.select_mode(type='EDGE', action='TOGGLE')
                     bpy.ops.mesh.select_non_manifold()
                     bpy.ops.mesh.edge_face_add()
-                    #bpy.ops.mesh.fill()
-                    '''
-                    bpy.ops.mesh.select_more()
-                    bpy.ops.mesh.select_more()
-                    bpy.ops.mesh.select_more()
-                    bpy.ops.mesh.vertices_smooth(repeat=10)
-                    bpy.ops.mesh.select_all(action='DESELECT')
-                    bpy.ops.mesh.select_non_manifold()
-                    bpy.ops.mesh.fill()
-                    bpy.ops.mesh.select_more()
-                    bpy.ops.mesh.select_more()
-                    bpy.ops.mesh.select_more()
-                    bpy.ops.mesh.vertices_smooth(repeat=5)
-                    '''
+
                     if self.doRemesh:
                         bpy.ops.object.mode_set(mode='SCULPT')
                         bpy.ops.object.voxel_remesh()
 
                     bpy.ops.object.mode_set(mode='OBJECT')
-
-                    #bpy.ops.object.select_all(action='DESELECT') # Ver si es op
-                    #activeObj.select_set(state=True) # AÑADIMOS EL OBJETO INICIAL A LA SELECCION
                     context.view_layer.objects.active = activeObj
-                    #bpy.ops.object.mode_set(mode='SCULPT')
-                    #bpy.ops.bas.close_gaps(use='TRIS', smooth_passes=3, keep_dyntopo=True)
-
                     bpy.ops.object.mode_set(mode='EDIT')
                     bpy.ops.mesh.select_all(action='DESELECT')
                     bpy.ops.mesh.select_non_manifold()
-                    bpy.ops.mesh.edge_face_add()
-                    #bpy.ops.mesh.fill()    
+                    bpy.ops.mesh.edge_face_add() 
 
                     if self.doRemesh and self.closeOnlyMasked==False:
                         bpy.ops.object.mode_set(mode='SCULPT')
