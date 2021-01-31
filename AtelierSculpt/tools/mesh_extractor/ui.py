@@ -46,7 +46,7 @@ class BAS_PT_Mask_Extractor_Options(Panel):
         content.prop(extractor, 'thickness', slider=True)
         content.prop(extractor, 'super_smooth', slider=True)
         content.prop(extractor, 'smooth_passes')
-        if extractor.mode == 'SINGLE' and self.superSmooth:
+        if extractor.mode == 'SINGLE' and extractor.super_smooth:
             content.prop(extractor, 'smooth_borders')
         
         #_col.separator()
