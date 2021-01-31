@@ -82,10 +82,16 @@ class DEFAULT_SCULPT_MODE_UI_BLOCKS:
         row.label(icon='MOD_MIRROR')
         sub = row.row(align=True)
         sub.scale_x = 0.6
-        sculpt = parent.sculpt
-        sub.prop(sculpt, "use_symmetry_x", text="X", toggle=True)
-        sub.prop(sculpt, "use_symmetry_y", text="Y", toggle=True)
-        sub.prop(sculpt, "use_symmetry_z", text="Z", toggle=True)
+        # Blender <= 2.90
+        #sculpt = parent.sculpt
+        #sub.prop(sculpt, "use_symmetry_x", text="X", toggle=True)
+        #sub.prop(sculpt, "use_symmetry_y", text="Y", toggle=True)
+        #sub.prop(sculpt, "use_symmetry_z", text="Z", toggle=True)
+        # Blender >= 2.91
+        mesh = parent.act_obj.data
+        sub.prop(mesh, "use_mirror_x", text="X", toggle=True)
+        sub.prop(mesh, "use_mirror_y", text="Y", toggle=True)
+        sub.prop(mesh, "use_mirror_z", text="Z", toggle=True)
         row.popover(panel="VIEW3D_PT_sculpt_symmetry_for_topbar", text="")
 
         return 4.5 # sub.scale_x * 3 + 2.66

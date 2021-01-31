@@ -27,6 +27,7 @@ class BAS_HT_toolHeader(ToolHeader):  # , UnifiedPaintPanel):
         # self.layout.template_header() # to change region
 
         # VARIABLES
+        self.act_obj = context.active_object
         toolsettings = context.tool_settings
         self.sculpt = toolsettings.sculpt
         self.brush = brush = self.sculpt.brush
