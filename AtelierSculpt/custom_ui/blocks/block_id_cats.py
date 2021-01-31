@@ -65,7 +65,7 @@ sliders =[
         ]
 others  =[
             ('DYNTOPO_MULTIRES', 'Dyntopo & Multires'),
-            ('SYMMETRY', 'Symmetry'),
+            ('MIRROR', 'Mirror / Symmetry'),
             ('MIRROR_PLANE', 'Mirror Plane')
         ]
 utils   =[

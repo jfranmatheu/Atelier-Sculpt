@@ -30,7 +30,7 @@ class UI_BLOCK_PPTS(Enum):
         'texture_options_show_open_image': bool
     }
     DYNTOPO_MULTIRES            =   None
-    SYMMETRY                    =   None
+    MIRROR                      =   None
     MIRROR_PLANE                =   None
     MASK                        =   None
     MASK_TOPOLOGY               =   None

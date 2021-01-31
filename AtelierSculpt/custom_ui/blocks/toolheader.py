@@ -390,8 +390,8 @@ class BAS_HT_toolheader_blocks():
 
         return row.ui_units_x
 
-#   SYMMETRY TOGGLES
-    def symmetry(th):
+#   MIRROR TOGGLES
+    def mirror(th):
         # MIRRORS X, Y, Z
         _row = th.layout.row(align=True)
         _row.ui_units_x = 3.5
@@ -400,7 +400,7 @@ class BAS_HT_toolheader_blocks():
         #_row.prop(th.sculpt, "use_symmetry_y", text="Y", toggle=True)
         #_row.prop(th.sculpt, "use_symmetry_z", text="Z", toggle=True)
         # Blender >= 2.91
-        mesh = parent.act_obj.data
+        mesh = th.act_obj.data
         _row.prop(mesh, "use_mirror_x", text="X", toggle=True)
         _row.prop(mesh, "use_mirror_y", text="Y", toggle=True)
         _row.prop(mesh, "use_mirror_z", text="Z", toggle=True)

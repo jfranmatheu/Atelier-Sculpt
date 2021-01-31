@@ -19,7 +19,7 @@ class UI_BLOCK_DRAW(Enum):
     TEXTURE_MANAGER             = draw.texture_manager
     TEXTURE_OPTIONS             = draw.texture_options
     DYNTOPO_MULTIRES            = draw.dyntopo_multires
-    SYMMETRY                    = draw.symmetry
+    MIRROR                      = draw.mirror
     MIRROR_PLANE                = draw.mirror_plane
     MASK                        = draw.mask
     MASK_TOPOLOGY               = draw.mask_topology
