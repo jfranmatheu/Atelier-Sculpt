@@ -415,7 +415,7 @@ class BAS_HT_toolheader_blocks():
     
 #   MIRROR + MIRROR PLANE TOGGLES
     def mirror_plane(th):
-        units = BAS_HT_toolheader_blocks.symmetry(th)
+        units = BAS_HT_toolheader_blocks.mirror(th)
         _row = th.layout.row(align=True)
         _row.ui_units_x = 2
         mirror = th.context.scene.bas_mirrorplane
