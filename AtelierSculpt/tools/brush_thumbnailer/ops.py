@@ -94,12 +94,21 @@ class BAS_OT_brush_render_icon(bpy.types.Operator):
                 else:
                     strength = sculpt.brush.strength
                     sculpt.brush.strength = props.brush_strength
-            x = sculpt.use_symmetry_x
-            y = sculpt.use_symmetry_y
-            z = sculpt.use_symmetry_z
-            sculpt.use_symmetry_x = False
-            sculpt.use_symmetry_y = False
-            sculpt.use_symmetry_z = False
+            # BLENDER <= 2.90
+            #x = sculpt.use_symmetry_x
+            #y = sculpt.use_symmetry_y
+            #z = sculpt.use_symmetry_z
+            #sculpt.use_symmetry_x = False
+            #sculpt.use_symmetry_y = False
+            #sculpt.use_symmetry_z = False
+            # BLENDER >= 2.91
+            mesh = context.active_object.data
+            x = mesh.use_mirror_x
+            y = mesh.use_mirror_y
+            z = mesh.use_mirror_z
+            mesh.use_mirror_x = False
+            mesh.use_mirror_y = False
+            mesh.use_mirror_z = False
             self.sculpt_base_mesh(context, props)
             if props.override_size:
                 if ups.use_unified_size:
@@ -111,9 +120,14 @@ class BAS_OT_brush_render_icon(bpy.types.Operator):
                     ups.strength = strength
                 else:
                     sculpt.brush.strength = strength
-            sculpt.use_symmetry_x = x
-            sculpt.use_symmetry_y = y
-            sculpt.use_symmetry_z = z
+            # BLENDER <= 2.90
+            #sculpt.use_symmetry_x = x
+            #sculpt.use_symmetry_y = y
+            #sculpt.use_symmetry_z = z
+            # BLENDER >= 2.91
+            mesh.use_mirror_x = x
+            mesh.use_mirror_y = y
+            mesh.use_mirror_z = z
             context.active_object.data.use_auto_smooth = True
             if text_obj:
                 text_obj.show_in_front = True
