@@ -28,3 +28,5 @@ An addon for Blender's Sculpt Mode
 
 - [[v.1.2.0b] Blender 2.8X](https://github.com/jfranmatheu/Atelier-Sculpt/releases/tag/1.2.0b)
 - [[v.2.0.15-beta] Blender 2.91+](https://github.com/jfranmatheu/Atelier-Sculpt/releases/tag/2.0.15-beta)
+
+[See All Releases](https://github.com/jfranmatheu/Atelier-Sculpt/releases)
