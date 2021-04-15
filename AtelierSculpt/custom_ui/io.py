@@ -11,6 +11,10 @@ def save_actual_ui_state(context):
         from os.path import join
         save_path = join(context.preferences.addons[main_package].preferences.saved_custom_ui_folder,  "autosave.json")
 
+    from os.path import exists
+    if not save_path or not exists(save_path):
+        return False
+
     strings = []
     for block in blocks:
         strings.append(block.id)
@@ -146,7 +150,7 @@ def load_custom_ui_preset(context):
 
 def reset_custom_ui_preset(context):
     from .blocks.block_data import UI_Block
-    from os.path import isfile, join
+    from os.path import isfile, join, exists, dirname
 
     UI_Block.clear()
 
@@ -154,7 +158,7 @@ def reset_custom_ui_preset(context):
     from .config.default_config import default_sculpt_config
     sculpt_ui_config = default_sculpt_config
 
-    if not isfile(sculpt_ui_config):
+    if not exists(sculpt_ui_config) or not isfile(sculpt_ui_config):
         return False
 
     # READ DEFAULT CONFIG FILE
@@ -179,9 +183,14 @@ def reset_custom_ui_preset(context):
             UI_Block(str)
 
     save_path = context.preferences.addons[main_package].preferences.get_custom_ui_presets(True)
+
     if save_path == "" or save_path == 'NONE':
         from os.path import join
         save_path = join(context.preferences.addons[main_package].preferences.saved_custom_ui_folder,  "autosave.json")
+
+    if not exists(dirname(save_path)):
+        print("[ATELIER_SCULPT] * ERROR: UI Preset path not found")
+        return False
 
     # WRITE DEFAULT CONFIG TO ACTIVE PRESET FILE
     with open(save_path, 'w+', encoding='utf-8') as json_file:

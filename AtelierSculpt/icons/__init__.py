@@ -45,7 +45,7 @@ class Icon(Enum):
     STROKE_ANCHORED     =   'strokeAnchored_icon'
     STROKE_CURVE        =   'strokeCurve_icon'
     STROKE_DOTS         =   'strokeDots_icon'
-    STROKE_DRAGDOT      =   'strokeDragDot_icon'
+    STROKE_DRAG_DOT     =   'strokeDragDot_icon'
     STROKE_LINE         =   'strokeLine_icon'
     STROKE_SPACE        =   'strokeSpace_icon'
     TEXTURE             =   'texture_icon'

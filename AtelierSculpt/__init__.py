@@ -20,7 +20,7 @@ bl_info = {
     "name" : "AtelierSculpt",
     "author" : "J. Fran Matheu (@jfranmatheu)",
     "description" : "New and custom UI plus brand new Sculpt Tools for Sculpt Mode! :D",
-    "blender" : (2, 91, 0),
+    "blender" : (2, 93, 0),
     "version" : (2, 0, 0),
     "location" : "Everywhere in Sculpt Mode!",
     "warning" : "Beta version! REMAKE OF BLENDER ATELIER: SCULPT",

@@ -316,14 +316,19 @@ class BAS_HT_toolheader_blocks():
         return row.ui_units_x
 
 #   BRUSH STROKE METHOD
-    def stroke_method(th, only_icons=True):
+    def stroke_method(th, only_icons=False):
         row = th.layout.row()
+        strk_mth = th.brush.stroke_method
+        stroke_type = 'STROKE_'+strk_mth.upper()
+        icon = getattr(Icon, stroke_type, None)
+        if not icon:
+            icon = Icon.STROKE
         if only_icons:
             ui_units_x = row.ui_units_x = 1.5
+            row.prop(th.brush, "stroke_method", text="", icon_value=icon())
         else:
-            ui_units_x = row.ui_units_x = 2.5 + len(th.brush.stroke_method)/4
-        row.prop(th.brush, "stroke_method", text="", icon_value=Icon.STROKE())
-
+            ui_units_x = row.ui_units_x = 2.5 + len(strk_mth)/4
+            row.prop(th.brush, "stroke_method", text='', icon_value=icon())
         return ui_units_x
 
 #   BRUSH FALLOFF SETTINGS/CURVES (DROPDOWN)
