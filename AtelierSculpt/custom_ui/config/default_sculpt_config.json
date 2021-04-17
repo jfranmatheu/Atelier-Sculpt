@@ -1,28 +1,15 @@
 {
     "blocks": [
+        "DEF_SWITCH_MODE",
         "DEF_BRUSH_SELECTOR",
-        "BRUSH_OPTIONS_COLL",
-        "SEPARATOR",
-        "BRUSH_SETTINGS_ADVANCED",
-        "STROKE",
-        "STROKE_METHOD",
-        "FALLOFF_PRESETS",
-        "FRONTFACES",
-        "SEPARATOR",
-
+        "DEF_BRUSH_RADIUS",
+        "DEF_BRUSH_STRENGTH",
+        "DEF_DIRECTION",
+        "DEF_BRUSH_SETTINGS",
         "DEF_SEPARATOR_SPACER",
-
-        "MASK",
+        "DEF_STROKE_CURVE_SNAP",
+        "DEF_SEPARATOR_SPACER",
         "DEF_MIRROR",
-        "SEPARATOR",
-        "DYNTOPO_MULTIRES",
-        "SEPARATOR",
-
-        "DEF_SEPARATOR_SPACER",
-        
-        "TEXTURE_OPTIONS",
-        "TEXTURE_MANAGER",
-        "SEPARATOR",
-        "INCREMENTAL_SAVE"
+        "DEF_OTHER_BRUSH_SETTINGS"
     ]
 }
