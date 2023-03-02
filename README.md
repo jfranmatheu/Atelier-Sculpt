@@ -8,8 +8,6 @@ An addon for Blender's Sculpt Mode
 
 - *Make a donation*
 
-[![Donate Via Paypal](http://argavirtual.com/lib/images/donate-paypal-main.png)](https://www.paypal.com/donate?hosted_button_id=83S48F5QQP7SL)
-
 - *Test Beta versions*
 
 - *Bug reports*
